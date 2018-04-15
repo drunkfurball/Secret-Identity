@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        
+        <title>Professor Insano's Secret Identity</title>
+        
+        <script>
+            
+            //functions for handling the interface configuration
+            function addClass(element, myClass) {
+                element.className += myClass;
+            }
+            
+	           function removeClass(element, myClass) {
+                var reg = new RegExp('(^| )' + myClass + '($| )', 'g');
+                element.className = element.className.replace(reg, ' ');
+            }
+            
+            //handles the view change
+            function changeView(elemA, elemB, myClass) {
+                //vanish elemA elements
+                for (x = 0; x < elemA.length; x++) {
+                    addClass(elemA[x], myClass);
+                }
+                //appear elemB elements
+                for (x = 0; x <elemB.length; x++) {
+                    removeClass(elemB[x], myClass);
+                }
+            }
+            
+            //handles reveal of name
+            function setSecretName(name) {
+                var out = document.getElementById("secret_name");
+                out.innerHTML = name;
+            }
+            
+            //handles reveal of card
+            function setSecretCard(name) {
+	               var inp = document.getElementById("secret_card");
+	               var suit = -1;
+	               var rank = -1;
+	               while (suit < 4) {
+		                  suit++;
+		                  rank = ((names[suit].indexOf(name) > -1)? names[suit].indexOf(name): -1);
+		                  if (rank > -1) break;
+	               };
+                switch(suit) {
+                    case 0:
+                        suit = "&spades;";
+                        break;
+                    case 1:
+                        suit = "&hearts;";
+                        break;
+                    case 2:
+                        suit = "&clubs;";
+                        break;
+                    case 3:
+                        suit = "&diams;";
+                        break;
+                    default:
+                        suit = "Error";
+                        break;
+                }
+                switch(rank) {
+                    case 0:
+                        rank = "A";
+                        break;
+                    case 10:
+                        rank = "J";
+                        break;
+                    case 11:
+                        rank ="Q";
+                        break;
+                    case 12:
+                        rank ="K";
+                        break;
+                    default:
+                        rank++;
+	               }
+	               inp.innerHTML = rank + "<br />" + suit;
+            }
+            
+            //2 dimensional array, first index is suit, second index is rank
+            //4 sets of thirteen unique namea, one for each of the 52 cards
+            var names = [
+                ['Aaron', 'Alex', 'Bob', 'Ben', 'Brian', 'Bruce', 'Chad', 'Chris', 'Dan', 'Dave', 'Derek', 'Earl', 'Eric'],
+                ['Ewan', 'Frank', 'Fred', 'Gabe', 'Gary', 'Guy', 'Isaac', 'Jack', 'Jeff', 'Jim', 'John', 'Ken', 'Kevin'],
+                ['Kyle', 'Lance', 'Larry', 'Lenny', 'Leo', 'Luke', 'Mark', 'Max', 'Mike', 'Nick', 'Paul', 'Phil', 'Ralph'],
+                ['Rene', 'Rob', 'Ron', 'Roy', 'Ryan', 'Sean', 'Seb', 'Stan', 'Steve', 'Theo', 'Tim', 'Tyler', 'Hugo']
+            ];
+            
+        </script>
+        
+        <style>
+            
+            * {
+                margin: 0px;
+                padding: 0px;
+            }
+            
+            body {
+                width: 100%;
+                font-size: 100%;
+            }
+            
+            /* black card */
+            .black {
+                color: black;
+            }
+            
+            /* red card */
+            .red {
+                color: red;
+            }
+            
+            /* A little style for the reveal */
+            .secret {
+                display: block;
+                border: solid green 5px;
+                margin: 72px auto;
+                padding-top: 100px;
+                width: 400px;
+                height: 400px;
+                text-align: center;
+                color: green;
+                font-size: 3em;
+            }
+            
+            /* class to vanish unnecessary elements */
+            .hidden {
+                display: none;
+            }
+            
+            /* mobile layout */
+            header {
+                display: block;
+                width: 100%;
+                text-align: center;
+                background-color: #1a1616;
+                color: white;
+                font-size: 1.75em;
+            }
+            
+            nav {
+                display: block;
+                width: 100%;
+                padding: 0px;
+                background-color: grey;
+                font-size: 3em;
+            }
+            
+            nav ul {
+                list-style: none;
+                height: 100%;
+            }
+            
+            nav ul li {
+                display: inline-block;
+                border-top: solid black 1px;
+                border-left: solid black 1px;
+                border-right: solid black 1px;
+                margin-top: 8px;
+                margin-left: 8px;
+                width: 32%;
+                height: 100%;
+                background-color: white;
+            }
+            
+            nav li a {
+                display: inline-block;
+                text-decoration: none;
+                width: 100%;
+                background-color: #a8a7a7;
+                color: grey;
+            }
+            
+            main {
+                display: block;
+                width: 100%;
+                height: 1000px;
+                padding-top: 48px;
+                font-size: 2em;
+            }
+            
+            form {
+                width: 85%;
+                margin: 1px auto;
+                padding: 16px;
+            }
+            
+            form label {
+                padding: 8px;
+                font-size: 2em;
+                text-align: center;
+            }
+            
+            form input[type="text"] {
+                font-size: 2em;
+            }
+            
+            form input[type="radio"] {
+                border: 0;
+                width: 48px;
+                height: 1em;
+                font-size: 1.25em;
+                margin-left: 48px;
+            }
+            
+            form fieldset {
+                font-size: 2em;
+            }
+            
+            form select {
+                font-size: 2.5em;
+                margin-left: 48px;
+            }
+            
+            footer {
+                display: block;
+                margin-top: 36px;
+                padding: 36px;
+                font-size: 0.65em;
+            }
+            
+            /* desktop layout */
+            @media screen and (min-width: 990px) {
+                
+            }
+            
+        </style>
+        
+    </head>
+    
+    <body>
+        
+        <header>
+            <h3>Murph Strange presents</h3>
+            <h1>Professor Insano's Secret Identity</h1>
+        </header>
+        
+        <nav>
+            <ul>
+                <li class="confederate hidden"><a href="#" onclick="changeView(document.getElementsByClassName('confederate'), document.getElementsByClassName('magician'), 'hidden')">Magician</a></li>
+                <li class="magician hidden">Magician</li>
+                <li class="magician hidden"><a href="#" onclick="changeView(document.getElementsByClassName('magician'), document.getElementsByClassName('confederate'), 'hidden')">Confederate</a></li>
+                <li class="confederate hidden">Confederate</li>
+            </ul>
+        </nav>
+        
+        <main>
+            
+            <form name="controller">
+                
+                <div class="magician hidden">
+                    
+                    <!-- Rank selection -->
+                    <label for="rank">Rank:</label>
+                    <select name="rank">
+                        <option value=0>A</option>
+                        <option value=1>2</option>
+                        <option value=2>3</option>
+                        <option value=3>4</option>
+                        <option value=4>5</option>
+                        <option value=5>6</option>
+                        <option value=6>7</option>
+                        <option value=7>8</option>
+                        <option value=8>9</option>
+                        <option value=9>10</option>
+                        <option value=10>J</option>
+                        <option value=11>Q</option>
+                        <option value=12>K</option>
+                    </select>
+                    
+                    <!-- Suit selection -->
+                    <fieldset>
+                        <legend>Suit</legend>
+                        <input type="radio" name="suit" value=0 checked><label class="black">&spades;</label></input>
+                        <input type="radio" name="suit" value=1><label class="red">&hearts;</label></input>
+                        <input type="radio" name="suit" value=2><label class="black">&clubs;</label></input>
+                        <input type="radio" name="suit" value=3><label class="red">&diams;</label></input>
+                    </fieldset>
+                    
+                </div>
+                
+                <div class="confederate hidden">
+                    
+                    <!-- Input for secret name -->
+                    <label for="input">Name: </label>
+                    <input type="text" name="input" size=12></input>
+                    
+                </div>
+                
+            </form>
+            
+            <!-- Output div for secret name -->
+            <div id="secret_name" class="secret magician hidden" onclick="setSecretName(names[document.controller.suit.value][document.controller.rank.value])">
+                Reveal
+            </div>
+        
+            <!-- Output div for secret card -->
+            <div id="secret_card" class="secret confederate hidden" onclick="setSecretCard(document.controller.input.value)">
+                Reveal
+            </div>
+            
+        </main>
+        
+        <footer>
+            coded by Murph Strange, quality control by Gamorex<br />
+            <!-- license info -->
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Professor Insano's Secret Identity</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://drunkfurball.github.io/Secret-Identity" property="cc:attributionName" rel="cc:attributionURL">Murph Strange</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+        </footer>
+        
+        <script>
+            
+            //appears the default view, confederate view
+            var defaultView = document.getElementsByClassName('confederate');
+            for (x = 0; x < defaultView.length; x++) {
+                removeClass(defaultView[x], 'hidden');
+            }
+            
+        </script>
+        
+    </body>
+    
+</html>
