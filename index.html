@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    
+
     <head>
         
         <title>Professor Insano's Secret Identity</title>
@@ -12,7 +12,7 @@
                 element.className += myClass;
             }
             
-	           function removeClass(element, myClass) {
+            function removeClass(element, myClass) {
                 var reg = new RegExp('(^| )' + myClass + '($| )', 'g');
                 element.className = element.className.replace(reg, ' ');
             }
@@ -37,14 +37,14 @@
             
             //handles reveal of card
             function setSecretCard(name) {
-	               var inp = document.getElementById("secret_card");
-	               var suit = -1;
-	               var rank = -1;
-	               while (suit < 4) {
-		                  suit++;
-		                  rank = ((names[suit].indexOf(name) > -1)? names[suit].indexOf(name): -1);
-		                  if (rank > -1) break;
-	               };
+                var inp = document.getElementById("secret_card");
+                var suit = -1;
+                var rank = -1;
+                while (suit < 4) {
+                    suit++;
+                    rank = ((names[suit].indexOf(name) > -1)? names[suit].indexOf(name): -1);
+                    if (rank > -1) break;
+                }
                 switch(suit) {
                     case 0:
                         suit = "&spades;";
@@ -77,8 +77,8 @@
                         break;
                     default:
                         rank++;
-	               }
-	               inp.innerHTML = rank + "<br />" + suit;
+                }
+                inp.innerHTML = rank + "<br />" + suit;
             }
             
             //2 dimensional array, first index is suit, second index is rank
@@ -89,11 +89,10 @@
                 ['Kyle', 'Lance', 'Larry', 'Lenny', 'Leo', 'Luke', 'Mark', 'Max', 'Mike', 'Nick', 'Paul', 'Phil', 'Ralph'],
                 ['Rene', 'Rob', 'Ron', 'Roy', 'Ryan', 'Sean', 'Seb', 'Stan', 'Steve', 'Theo', 'Tim', 'Tyler', 'Hugo']
             ];
-            
+
         </script>
         
         <style>
-            
             * {
                 margin: 0px;
                 padding: 0px;
@@ -116,15 +115,14 @@
             
             /* A little style for the reveal */
             .secret {
-                display: block;
-                border: solid green 5px;
-                margin: 72px auto;
-                padding-top: 100px;
                 width: 400px;
                 height: 400px;
+                margin: 72px auto;
+                padding-top: 100px;
+                border: 5px solid green;
+                font-size: 3em;
                 text-align: center;
                 color: green;
-                font-size: 3em;
             }
             
             /* class to vanish unnecessary elements */
@@ -134,55 +132,44 @@
             
             /* mobile layout */
             header {
-                display: block;
-                width: 100%;
                 text-align: center;
-                background-color: #1a1616;
                 color: white;
-                font-size: 1.75em;
+                background-color: #1a1616;
             }
             
             nav {
-                display: block;
-                width: 100%;
-                padding: 0px;
                 background-color: grey;
-                font-size: 3em;
             }
             
             nav ul {
                 list-style: none;
-                height: 100%;
             }
             
             nav ul li {
                 display: inline-block;
-                border-top: solid black 1px;
-                border-left: solid black 1px;
-                border-right: solid black 1px;
+                width: 32%;
                 margin-top: 8px;
                 margin-left: 8px;
-                width: 32%;
-                height: 100%;
+                border-top: 1px solid black;
+                border-left: 1px solid black;
+                border-right: 1px solid black;
+                font-size: 2em;
                 background-color: white;
             }
             
             nav li a {
                 display: inline-block;
-                text-decoration: none;
                 width: 100%;
-                background-color: #a8a7a7;
+                text-decoration: none;
                 color: grey;
+                background-color: #a8a7a7;
+                
             }
             
             main {
-                display: block;
-                width: 100%;
-                height: 1000px;
                 padding-top: 48px;
-                font-size: 2em;
             }
-            
+            /* HERE!! */
             form {
                 width: 85%;
                 margin: 1px auto;
@@ -255,32 +242,33 @@
                 <div class="magician hidden">
                     
                     <!-- Rank selection -->
-                    <label for="rank">Rank:</label>
-                    <select name="rank">
-                        <option value=0>A</option>
-                        <option value=1>2</option>
-                        <option value=2>3</option>
-                        <option value=3>4</option>
-                        <option value=4>5</option>
-                        <option value=5>6</option>
-                        <option value=6>7</option>
-                        <option value=7>8</option>
-                        <option value=8>9</option>
-                        <option value=9>10</option>
-                        <option value=10>J</option>
-                        <option value=11>Q</option>
-                        <option value=12>K</option>
-                    </select>
+                    <label for="rank">Rank:
+                        <select name="rank">
+                            <option value=0>A</option>
+                            <option value=1>2</option>
+                            <option value=2>3</option>
+                            <option value=3>4</option>
+                            <option value=4>5</option>
+                            <option value=5>6</option>
+                            <option value=6>7</option>
+                            <option value=7>8</option>
+                            <option value=8>9</option>
+                            <option value=9>10</option>
+                            <option value=10>J</option>
+                            <option value=11>Q</option>
+                            <option value=12>K</option>
+                        </select>
+                    </label>
                     
                     <!-- Suit selection -->
                     <fieldset>
                         <legend>Suit</legend>
-                        <input type="radio" name="suit" value=0 checked><label class="black">&spades;</label></input>
-                        <input type="radio" name="suit" value=1><label class="red">&hearts;</label></input>
-                        <input type="radio" name="suit" value=2><label class="black">&clubs;</label></input>
-                        <input type="radio" name="suit" value=3><label class="red">&diams;</label></input>
+                        <label for="r0" class="black"><input type="radio" name="suit" id="r0" value=0 checked />&spades;</label>
+                        <label for="r1" class="red"><input type="radio" name="suit" id="r1" value=1 />&hearts;</label>
+                        <label for="r2" class="black"><input type="radio" name="suit" id="r2" value=2 />&clubs;</label>
+                        <label for="r3" class="red"><input type="radio" name="suit" id="r3" value=3 />&diams;</label>
                     </fieldset>
-                    
+
                 </div>
                 
                 <div class="confederate hidden">
